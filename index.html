@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Interest Rate Calculator</title>
+    <style>
+        /* Basic page styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        /* Calculator container styling */
+        .calculator {
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Input fields styling */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Calculate button styling */
+        .button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* Result display styling */
+        .result {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Footer section styling */
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loan Interest Rate Calculator container -->
+<div class="calculator">
+    <h2>Loan Interest Rate Calculator</h2>
+    <!-- Prime rate input -->
+    <div class="input-group">
+        <label for="primeRate">Prime Rate (%):</label>
+        <input type="number" id="primeRate" placeholder="Enter current prime rate">
+    </div>
+    
+    <!-- Loan amount input -->
+    <div class="input-group">
+        <label for="loanAmount">Loan Amount:</label>
+        <input type="number" id="loanAmount" placeholder="Enter loan amount">
+    </div>
+    
+    <!-- Loan term input -->
+    <div class="input-group">
+        <label for="loanTerm">Loan Term (years):</label>
+        <input type="number" id="loanTerm" placeholder="Enter loan term in years">
+    </div>
+    
+    <!-- Calculate button -->
+    <button class="button" onclick="calculateLoan()">Calculate</button>
+
+    <!-- Result display area -->
+    <div id="result" class="result"></div>
+</div>
+
+<!-- Footer section with credits -->
+<div class="footer">
+    <p>Loan Interest Rate Calculator created by <a href="https://sandz-kn.com" target="_blank">Sandziso Kunene</a></p>
+    <p>
+        <a href="https://github.com/uxsandz/" target="_blank">GitHub</a> |
+        <a href="https://x.com/sandzisokunene" target="_blank">X</a>
+    </p>
+</div>
+
+<script>
+    // Loan Interest Rate Calculator by Sandziso Kunene
+    // This simple tool calculates the total interest and final repayment
+    // by adding a fixed 2% to the user-provided prime rate.
+
+    // Function to calculate loan interest and final repayment amount
+    function calculateLoan() {
+        // Get values from input fields
+        let primeRate = parseFloat(document.getElementById("primeRate").value);
+        let loanAmount = parseFloat(document.getElementById("loanAmount").value);
+        let loanTerm = parseFloat(document.getElementById("loanTerm").value);
+
+        // Validate input
+        if (isNaN(primeRate) || isNaN(loanAmount) || isNaN(loanTerm) || primeRate <= 0 || loanAmount <= 0 || loanTerm <= 0) {
+            document.getElementById("result").innerHTML = "Please enter valid values.";
+            return;
+        }
+
+        // Add additional 2% interest to the prime rate
+        let totalInterestRate = primeRate + 2;
+
+        // Calculate total interest over the loan term
+        let totalInterest = (loanAmount * totalInterestRate * loanTerm) / 100;
+        let totalRepayment = loanAmount + totalInterest;
+
+        // Display results
+        document.getElementById("result").innerHTML = `
+            <p>Total Interest Rate (including 2%): ${totalInterestRate.toFixed(2)}%</p>
+            <p>Total Interest: ${totalInterest.toFixed(2)}</p>
+            <p>Total Repayment Amount: ${totalRepayment.toFixed(2)}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
